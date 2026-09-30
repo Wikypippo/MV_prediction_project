@@ -12,3 +12,16 @@ Questo progetto di Machine Learning esplora e prevede il valore di mercato dei c
 * Scikit-Learn (Random Forest, Preprocessing, Metriche)
 * Pandas & NumPy (Data Manipulation)
 * Matplotlib (Data Visualization)
+
+## 💻 Web App Interattiva (Streamlit)
+
+Per validare empiricamente i modelli di *Machine Learning* e fornire un'interfaccia fruibile per le stime in tempo reale, il progetto include una demo interattiva realizzata in **Streamlit**.
+
+L'applicazione permette di inserire le statistiche assolute di un calciatore (età, presenze, minutaggio, ruolo, gol, assist e campionato) e calcolare istantaneamente il suo valore di mercato stimato.
+
+### 🚀 Come avviare la demo
+
+Dalla root del repository, esegui:
+
+```bash
+streamlit run demo/demo.py

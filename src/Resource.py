@@ -86,3 +86,23 @@ def train_regression_model(
         torch.cuda.empty_cache()
 
     return model
+
+
+def analizza_peggiori_errori(y_true_milioni, y_pred_milioni, nome_modello, top_n=10):
+    y_true = np.asarray(y_true_milioni).flatten()
+    y_pred = np.asarray(y_pred_milioni).flatten()
+    
+    errori = np.abs(y_true - y_pred)
+    peggiori_idx = np.argsort(errori)[-top_n:][::-1]
+
+    print("=" * 65)
+    print(f" ANALISI ERRORI PIÙ GRANDI (TOP {top_n}) - {nome_modello.upper()}")
+    print("=" * 65)
+    print("Reale vs Predetto (Mln €) per i 10 errori più grandi:")
+    
+    for rank, i in enumerate(peggiori_idx, 1):
+        print(f"  {rank:2d}. Reale: {y_true[i]:6.1f} | Predetto: {y_pred[i]:6.1f} | Errore: {errori[i]:6.1f}")
+
+    print(f"\nErrore medio su questi {top_n} casi: {errori[peggiori_idx].mean():.2f} Mln €")
+    print(f"Errore medio (MAE) su tutto il test set: {errori.mean():.4f} Mln €")
+    print(f"Mediana errore su tutto il test set:     {np.median(errori):.4f} Mln €\n")
